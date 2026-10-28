@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TechGo – suporte técnico na hora</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6fb;--surface:#fff;--ink:#12233f;--muted:#5a6a85;--line:#d8e0ee;--blue:#2f6bff;--blue-ink:#fff;--yellow:#ffc93c;--green:#1fa971;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a2e;--surface:#162641;--ink:#eaf0fb;--muted:#9fb0cc;--line:#2a3d5e;--blue:#6b95ff;--blue-ink:#0e1a2e;--green:#3cd49a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1a2e;--surface:#162641;--ink:#eaf0fb;--muted:#9fb0cc;--line:#2a3d5e;--blue:#6b95ff;--blue-ink:#0e1a2e;--green:#3cd49a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 clamp(17px,1.1vw,22px)/1.55 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","DM Sans",sans-serif;line-height:1.1;margin:0}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;max-width:1700px;margin:0 auto;padding:18px clamp(20px,4vw,80px)}
+.logo{font:800 clamp(26px,2vw,36px) "Bricolage Grotesque",sans-serif;letter-spacing:-.5px}
+.logo span{background:var(--yellow);color:#12233f;padding:0 8px;border-radius:8px;margin-left:2px}
+nav{display:flex;flex-wrap:wrap;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:4px}
+nav button{font:500 15px "DM Sans",sans-serif;border:0;background:none;color:var(--muted);padding:9px 16px;border-radius:999px;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--blue);color:var(--blue-ink)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+main{max-width:1700px;margin:0 auto;padding:12px clamp(20px,4vw,80px) 64px}
+section[hidden]{display:none}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,5vw,96px);align-items:center;padding:clamp(28px,7vh,90px) 0;min-height:min(70vh,760px)}
+.hero h1{font-size:clamp(36px,5.2vw,88px);font-weight:800;letter-spacing:-1.5px}
+.hero p{color:var(--muted);max-width:54ch;margin:20px 0 28px}
+.btn{font:700 16px "DM Sans",sans-serif;background:var(--blue);color:var(--blue-ink);border:0;border-radius:12px;padding:14px 22px;cursor:pointer}
+.btn.alt{background:none;color:var(--ink);border:1.5px solid var(--line);margin-left:8px}
+.track{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px}
+.track .who{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.avatar{width:46px;height:46px;border-radius:50%;background:var(--yellow);color:#12233f;display:grid;place-items:center;font:800 18px "Bricolage Grotesque",sans-serif}
+.who small{color:var(--muted);display:block}
+.steps{list-style:none;margin:0;padding:0}
+.steps li{position:relative;padding:0 0 18px 34px;color:var(--muted)}
+.steps li:last-child{padding-bottom:0}
+.steps li::before{content:"";position:absolute;left:0;top:3px;width:18px;height:18px;border-radius:50%;border:2px solid var(--line);background:var(--surface)}
+.steps li::after{content:"";position:absolute;left:8px;top:24px;bottom:2px;width:2px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps li.done{color:var(--ink)}
+.steps li.done::before{background:var(--green);border-color:var(--green)}
+.steps li.now{color:var(--ink);font-weight:700}
+.steps li.now::before{background:var(--yellow);border-color:var(--yellow);animation:pulse 1.6s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,201,60,.7)}100%{box-shadow:0 0 0 12px rgba(255,201,60,0)}}
+@media (prefers-reduced-motion:reduce){.steps li.now::before{animation:none}}
+.how{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;border-top:1px solid var(--line);padding-top:32px;margin-top:20px}
+.how h3{font-size:21px;margin-bottom:6px}
+.how p{margin:0;color:var(--muted)}
+.panel{max-width:760px;margin:0 auto;padding-top:24px}
+.panel h2{font-size:clamp(30px,4vw,56px);font-weight:800;letter-spacing:-1px;margin-bottom:8px}
+.panel>p{color:var(--muted);margin:0 0 24px}
+label{display:block;font-weight:700;font-size:15px;margin:16px 0 6px}
+input,select,textarea{width:100%;font:400 16px "DM Sans",sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px}
+textarea{min-height:100px;resize:vertical}
+.panel .btn{margin-top:22px}
+.ok{margin-top:22px;padding:18px;border-radius:14px;border:1.5px solid var(--green)}
+.call{margin-top:22px;background:#12233f;color:#eaf0fb;border-radius:18px;padding:20px}
+.call .screen{aspect-ratio:16/9;border-radius:12px;background:#1d3358;display:grid;place-items:center;text-align:center;padding:12px;font-size:15px}
+.call .row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.call button{font:500 14px "DM Sans",sans-serif;border:0;border-radius:10px;padding:10px 14px;background:#2a4573;color:#eaf0fb;cursor:pointer}
+.call button.end{background:#e5484d;color:#fff}
+.note{color:var(--muted);font-size:14px;margin-top:28px}
+.live{display:inline-flex;align-items:center;gap:8px;font-weight:500;font-size:15px;color:var(--muted);margin-bottom:14px}
+.live::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--green)}
+.block h2{font-size:clamp(26px,3vw,46px);font-weight:800;letter-spacing:-.8px;margin:44px 0 6px}
+.block>p{color:var(--muted);margin:0}
+.svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px}
+.svc div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.svc strong{display:block;font:700 18px "Bricolage Grotesque",sans-serif;margin-bottom:4px}
+.svc span{color:var(--muted);font-size:15px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:10px}
+summary{cursor:pointer;font-weight:700}
+details ol,details p{margin:10px 0 0;color:var(--muted)}
+details ol{padding-left:20px}
+.panel.wide{max-width:1180px}
+.contact{max-width:1700px;margin:0 auto;padding:0 clamp(20px,4vw,80px) 10px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:14px}
+.contact a,.contact button{font:500 14px "DM Sans",sans-serif;color:var(--ink);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.hrs{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+.hrs::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--muted)}
+.hrs.on::before{background:var(--green)}
+small.hint{display:block;color:var(--muted);font-size:14px;margin-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.chips button{font:500 14px "DM Sans",sans-serif;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--blue);color:var(--blue-ink);border-color:var(--blue)}
+.tbl{overflow-x:auto;margin-top:14px}
+table{border-collapse:collapse;width:100%;min-width:480px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);font-size:15px}
+.tid{font-family:"Bricolage Grotesque",sans-serif;font-size:20px;letter-spacing:.5px}
+.svc a,.svc button.lnk{font:700 15px "DM Sans",sans-serif;color:var(--blue);background:none;border:0;padding:0;margin-top:8px;display:inline-block;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+dialog{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:22px;max-width:460px;width:calc(100% - 32px)}
+dialog::backdrop{background:rgba(10,20,40,.55)}
+dialog h2{font-size:26px}
+.msgs{height:220px;overflow-y:auto;border:1px solid var(--line);border-radius:12px;padding:10px;margin:14px 0 10px;display:flex;flex-direction:column;gap:8px}
+.msgs p{margin:0;padding:8px 12px;border-radius:12px;max-width:85%;font-size:15px}
+.msgs .bot{background:var(--bg)}
+.msgs .me{background:var(--blue);color:var(--blue-ink);align-self:flex-end}
+.chatrow{display:flex;gap:8px}
+.chatrow .btn{margin:0;padding:12px 16px}
+@media (max-width:760px){.hero,.how{grid-template-columns:1fr}.btn.alt{margin:10px 0 0}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Tech<span>Go</span></div>
+  <nav role="tablist" aria-label="Seções do site">
+    <button role="tab" id="t-inicio" aria-selected="true" data-tab="inicio">Início</button>
+    <button role="tab" id="t-solucoes" aria-selected="false" data-tab="solucoes">Base de conhecimento</button>
+    <button role="tab" id="t-chamar" aria-selected="false" data-tab="chamar">Chamar técnico</button>
+    <button role="tab" id="t-tickets" aria-selected="false" data-tab="tickets">Tickets</button>
+    <button role="tab" id="t-atendimento" aria-selected="false" data-tab="atendimento">Atendimento</button>
+    <button role="tab" id="t-sobre" aria-selected="false" data-tab="sobre">Sobre</button>
+    <button role="tab" id="t-trabalhe" aria-selected="false" data-tab="trabalhe">Trabalhe conosco</button>
+    <button role="tab" id="t-reclame" aria-selected="false" data-tab="reclame">Reclame aqui</button>
+  </nav>
+</header>
+<div class="contact" role="complementary" aria-label="Canais de contato">
+  <span class="hrs" id="status">Verificando horário</span>
+  <a href="tel:+556700000000">Telefone (67) 0000-0000</a>
+  <a href="https://wa.me/5567000000000" target="_blank" rel="noopener">WhatsApp</a>
+  <button data-chat>Chat ao vivo</button>
+  <button data-go="atendimento">Horários e SLA</button>
+</div>
+<main>
+  <section id="inicio">
+    <div class="hero">
+      <div>
+        <span class="live">Atendimento por chamada de vídeo</span>
+        <h1>O técnico chega pela tela. Seu problema vai embora.</h1>
+        <p>Computador lento, Wi-Fi caído, celular travado? Chame um técnico pelo site e resolva ao vivo, em uma chamada de vídeo em que ele guia você passo a passo.</p>
+        <button class="btn" data-go="chamar">Chamar um técnico</button>
+        <button class="btn alt" data-go="trabalhe">Sou técnico</button>
+      </div>
+      <div class="track" aria-label="Exemplo de acompanhamento do chamado">
+        <div class="who"><div class="avatar">M</div><div><strong>Marcos, técnico de redes</strong><small>Exemplo de chamado</small></div></div>
+        <ol class="steps">
+          <li class="done">Chamado enviado</li>
+          <li class="done">Técnico aceitou</li>
+          <li class="now">Em chamada, reiniciando o roteador</li>
+          <li>Problema resolvido</li>
+        </ol>
+      </div>
+    </div>
+    <div class="how">
+      <div><h3>Conte o problema</h3><p>Escolha o tipo de ajuda e descreva em poucas palavras o que está acontecendo.</p></div>
+      <div><h3>Um técnico atende</h3><p>O primeiro técnico disponível aceita e inicia a chamada de vídeo com você.</p></div>
+      <div><h3>Resolva na hora</h3><p>Ele mostra o que fazer, você faz, e o chamado só fecha quando estiver tudo certo.</p></div>
+    </div>
+    <div class="block">
+      <h2>O que a gente resolve</h2>
+      <p>Do básico ao que parece impossível, sempre com um técnico ao vivo.</p>
+      <div class="svc">
+        <div><strong>Computador e notebook</strong><span>Lentidão, travamentos, vírus, tela azul, formatação.</span></div>
+        <div><strong>Celular e tablet</strong><span>Memória cheia, bateria, apps, backup e troca de aparelho.</span></div>
+        <div><strong>Internet e Wi-Fi</strong><span>Sinal fraco, roteador, quedas e senha da rede.</span></div>
+        <div><strong>Impressora</strong><span>Não imprime, não conecta, papel preso, configuração.</span></div>
+        <div><strong>Contas e senhas</strong><span>E-mail, redes sociais, recuperação de acesso e segurança.</span></div>
+        <div><strong>Programas e sistemas</strong><span>Instalação, Office, videochamadas e atualizações.</span></div>
+      </div>
+      <h2>Perguntas frequentes</h2>
+      <details><summary>Preciso instalar alguma coisa?</summary><p>Não. A chamada acontece pelo navegador, no próprio site.</p></details>
+      <details><summary>O técnico mexe no meu aparelho sozinho?</summary><p>Não. Ele guia você passo a passo e você faz cada etapa, vendo tudo na tela.</p></details>
+      <details><summary>E se o problema não for resolvido?</summary><p>O chamado só fecha quando você confirmar. Se precisar, o técnico agenda uma nova chamada.</p></details>
+      <details><summary>Posso reclamar de um atendimento?</summary><p>Pode. Use a aba Reclame aqui e você recebe um protocolo.</p></details>
+    </div>
+  </section>
+
+  <section id="solucoes" hidden>
+    <div class="panel wide">
+      <h2>Base de conhecimento</h2>
+      <p>Guias passo a passo para resolver sozinho. Se não funcionar, abra um ticket ou chame um técnico.</p>
+      <label for="busca">Buscar problema</label>
+      <input id="busca" placeholder="Ex.: wi-fi, impressora, lento">
+      <div class="chips" id="chips"><button data-c="todos" aria-pressed="true">Todos</button><button data-c="pc" aria-pressed="false">Computador</button><button data-c="cel" aria-pressed="false">Celular</button><button data-c="net" aria-pressed="false">Internet</button><button data-c="imp" aria-pressed="false">Impressora</button><button data-c="seg" aria-pressed="false">Contas e segurança</button></div>
+      <div id="lista">
+        <details data-cat="pc"><summary>Computador lento</summary><ol><li>Reinicie o computador.</li><li>Feche programas que você não está usando.</li><li>Libere espaço: apague arquivos grandes e esvazie a lixeira.</li><li>Verifique atualizações e rode o antivírus.</li></ol></details>
+        <details data-cat="net"><summary>Wi-Fi conectado, mas sem internet</summary><ol><li>Desligue o roteador da tomada por 30 segundos e ligue de novo.</li><li>Teste em outro aparelho para saber se é só neste.</li><li>Esqueça a rede no aparelho e conecte de novo.</li><li>Se persistir, ligue para sua operadora ou chame um técnico.</li></ol></details>
+        <details data-cat="cel"><summary>Celular travando</summary><ol><li>Reinicie o aparelho.</li><li>Libere memória apagando fotos, vídeos e apps sem uso.</li><li>Atualize o sistema e os aplicativos.</li><li>Faça backup antes de pensar em restaurar o celular.</li></ol></details>
+        <details data-cat="imp"><summary>Impressora não imprime</summary><ol><li>Confira se está ligada, com papel e tinta ou toner.</li><li>Verifique se há trabalhos presos na fila de impressão e cancele.</li><li>Desligue a impressora, espere um minuto e ligue.</li><li>Confirme se computador e impressora estão na mesma rede Wi-Fi.</li></ol></details>
+        <details data-cat="pc"><summary>Sem som no computador</summary><ol><li>Veja se o volume e o mudo estão corretos.</li><li>Troque o dispositivo de saída de áudio nas configurações.</li><li>Reconecte fones ou caixas de som.</li><li>Reinicie o computador.</li></ol></details>
+        <details data-cat="seg"><summary>Esqueci a senha do e-mail ou da conta</summary><ol><li>Use a opção “Esqueci a senha” na tela de login.</li><li>Confirme por e-mail alternativo ou número de celular.</li><li>Crie uma senha nova, longa e diferente das outras.</li><li>Ative a verificação em duas etapas.</li></ol></details>
+        <details data-cat="pc"><summary>Pen drive não é reconhecido</summary><ol><li>Tente outra porta USB.</li><li>Teste em outro computador.</li><li>Reinicie o computador com o pen drive conectado.</li><li>Se tiver arquivos importantes, não formate: chame um técnico.</li></ol></details>
+        <details data-cat="seg"><summary>Suspeita de vírus ou golpe</summary><ol><li>Desconecte da internet.</li><li>Não clique em links nem informe senhas ou códigos.</li><li>Rode o antivírus e troque suas senhas por outro aparelho.</li><li>Fale com o banco se houver dados financeiros envolvidos.</li></ol></details>
+        <details data-cat="pc"><summary>Tela azul no Windows</summary><ol><li>Anote o código de erro que aparece na tela.</li><li>Reinicie e veja se o problema volta.</li><li>Desconecte pen drives, HDs externos e outros acessórios.</li><li>Se repetir, chame um técnico com o código anotado.</li></ol></details>
+        <details data-cat="cel"><summary>Bateria do celular acaba rápido</summary><ol><li>Veja em Configurações quais apps mais gastam bateria.</li><li>Reduza o brilho da tela e ative o modo de economia.</li><li>Feche apps em segundo plano e atualize o sistema.</li><li>Se continuar, a bateria pode estar desgastada: chame um técnico.</li></ol></details>
+        <details data-cat="pc"><summary>Câmera ou microfone não funcionam na videochamada</summary><ol><li>Permita o acesso à câmera e ao microfone no navegador.</li><li>Feche outros programas que possam estar usando a câmera.</li><li>Escolha o dispositivo certo nas configurações da chamada.</li><li>Reinicie o navegador ou o computador.</li></ol></details>
+        <details data-cat="seg"><summary>Como fazer backup de fotos e arquivos</summary><ol><li>Escolha onde guardar: nuvem ou HD externo.</li><li>Selecione fotos, documentos e arquivos importantes.</li><li>Copie ou ative o backup automático.</li><li>Confira se os arquivos abrem no destino antes de apagar do original.</li></ol></details>
+      </div>
+      <p id="vazio" hidden>Nenhuma solução encontrada. Chame um técnico e ele te ajuda.</p>
+      <button class="btn" data-go="chamar">Não resolveu? Chamar técnico</button>
+    </div>
+  </section>
+
+  <section id="tickets" hidden>
+    <div class="panel">
+      <h2>Abrir ticket</h2>
+      <p>Cada ticket recebe um ID único para você acompanhar o andamento.</p>
+      <label for="t-nome">Seu nome</label><input id="t-nome" autocomplete="name">
+      <label for="t-contato">E-mail ou WhatsApp</label><input id="t-contato" autocomplete="email">
+      <small class="hint">Usamos para avisar quando houver resposta.</small>
+      <label for="t-cat">Categoria</label>
+      <select id="t-cat"><option>Computador ou notebook</option><option>Celular ou tablet</option><option>Internet e Wi-Fi</option><option>Impressora</option><option>Contas e senhas</option><option>Programas e sistemas</option><option>Outro</option></select>
+      <label for="t-prio">Prioridade</label>
+      <select id="t-prio"><option value="Urgente">Urgente: não consigo usar ou trabalhar</option><option value="Normal" selected>Normal: atrapalha, mas consigo seguir</option><option value="Baixa">Baixa: dúvida ou melhoria</option></select>
+      <small class="hint" id="t-sla"></small>
+      <label for="t-desc">O que está acontecendo?</label><textarea id="t-desc"></textarea>
+      <small class="hint">Diga o aparelho, o que você tentou e a mensagem de erro, se houver.</small>
+      <button class="btn" id="send-ticket">Abrir ticket</button>
+      <div id="ticket-area"></div>
+      <h2 style="margin-top:44px">Consultar ticket</h2>
+      <p>Digite o ID que você recebeu.</p>
+      <label for="t-busca">ID do ticket</label><input id="t-busca" placeholder="TG-20261021-AB12">
+      <button class="btn" id="find-ticket">Consultar</button>
+      <div id="find-area"></div>
+    </div>
+  </section>
+
+  <section id="atendimento" hidden>
+    <div class="panel wide">
+      <h2>Canais, horários e prazos</h2>
+      <p>Escolha o canal que for mais fácil. Todos levam ao mesmo atendimento.</p>
+      <div class="svc">
+        <div><strong>Telefone</strong><span>(67) 0000-0000<br>Seg a sex, 8h às 18h</span><br><a href="tel:+556700000000">Ligar agora</a></div>
+        <div><strong>WhatsApp</strong><span>(67) 00000-0000<br>Recebemos 24h e respondemos no horário de atendimento</span><br><a href="https://wa.me/5567000000000" target="_blank" rel="noopener">Abrir conversa</a></div>
+        <div><strong>Chat ao vivo</strong><span>Seg a sex, 8h às 20h<br>Sáb, 8h às 14h</span><br><button class="lnk" data-chat>Iniciar chat</button></div>
+        <div><strong>Chamada de vídeo</strong><span>Seg a sex, 8h às 20h<br>Sáb, 8h às 14h</span><br><button class="lnk" data-go="chamar">Chamar técnico</button></div>
+      </div>
+      <p style="margin-top:14px;color:var(--muted)">Domingos e feriados: apenas tickets e WhatsApp, respondidos no próximo dia útil.</p>
+      <h2 style="margin-top:40px;font-size:28px">Prazos de atendimento (SLA)</h2>
+      <div class="tbl"><table><thead><tr><th>Prioridade</th><th>Quando usar</th><th>Primeira resposta</th><th>Meta de solução</th></tr></thead><tbody>
+        <tr><td><strong>Urgente</strong></td><td>Não consigo usar ou trabalhar</td><td>15 minutos</td><td>4 horas</td></tr>
+        <tr><td><strong>Normal</strong></td><td>Atrapalha, mas consigo seguir</td><td>1 hora</td><td>1 dia útil</td></tr>
+        <tr><td><strong>Baixa</strong></td><td>Dúvida ou melhoria</td><td>4 horas</td><td>3 dias úteis</td></tr>
+      </tbody></table></div>
+      <p style="margin-top:10px;color:var(--muted);font-size:15px">Os prazos contam dentro do horário de atendimento.</p>
+      <h2 style="margin-top:40px;font-size:28px">Níveis de atendimento</h2>
+      <div class="svc">
+        <div><strong>Nível 1: triagem</strong><span>Chat, WhatsApp e tickets. Resolve dúvidas simples e indica artigos da base de conhecimento.</span></div>
+        <div><strong>Nível 2: técnico por vídeo</strong><span>Chamada ao vivo em que o técnico guia você passo a passo.</span></div>
+        <div><strong>Nível 3: especialista</strong><span>Casos complexos de rede, dados e segurança, com retorno combinado com você.</span></div>
+      </div>
+      <button class="btn" data-go="tickets">Abrir ticket</button>
+    </div>
+  </section>
+
+  <section id="sobre" hidden>
+    <div class="panel wide">
+      <h2>Sobre a TechGo</h2>
+      <p>A TechGo leva o suporte técnico até você sem precisar sair de casa nem esperar o técnico chegar. Você chama pelo site, entra em uma chamada de vídeo e um profissional guia cada passo até o problema acabar.</p>
+      <div class="svc">
+        <div><strong>Missão</strong><span>Tornar a tecnologia simples para qualquer pessoa, com ajuda humana e rápida.</span></div>
+        <div><strong>Como atendemos</strong><span>Chamado pelo site, técnico disponível aceita e a resolução acontece ao vivo.</span></div>
+        <div><strong>Nosso compromisso</strong><span>Linguagem simples, você acompanha tudo na tela e o chamado só fecha quando você confirmar.</span></div>
+      </div>
+      <button class="btn" data-go="chamar">Chamar um técnico</button>
+      <button class="btn alt" data-go="trabalhe">Trabalhar na TechGo</button>
+    </div>
+  </section>
+
+  <section id="chamar" hidden>
+    <div class="panel">
+      <h2>Chamar um técnico</h2>
+      <p>Preencha e a gente conecta você com quem pode ajudar agora.</p>
+      <label for="nome">Seu nome</label><input id="nome" autocomplete="name">
+      <label for="tipo">Tipo de problema</label>
+      <select id="tipo">
+        <option>Computador ou notebook</option><option>Celular ou tablet</option><option>Internet e Wi-Fi</option>
+        <option>Impressora</option><option>Programas e e-mail</option><option>Outro</option>
+      </select>
+      <label for="desc">O que está acontecendo?</label><textarea id="desc"></textarea>
+      <button class="btn" id="send-call">Chamar técnico</button>
+      <div id="call-area"></div>
+    </div>
+  </section>
+
+  <section id="trabalhe" hidden>
+    <div class="panel">
+      <h2>Trabalhe conosco</h2>
+      <p>Tem experiência com tecnologia e gosta de explicar? Atenda clientes de onde estiver.</p>
+      <label for="c-nome">Nome completo</label><input id="c-nome" autocomplete="name">
+      <label for="c-mail">E-mail</label><input id="c-mail" type="email" autocomplete="email">
+      <label for="c-area">Área de atuação</label>
+      <select id="c-area"><option>Computadores e notebooks</option><option>Celulares e tablets</option><option>Redes e Wi-Fi</option><option>Impressoras</option><option>Sistemas e programas</option></select>
+      <label for="c-exp">Conte sua experiência</label><textarea id="c-exp"></textarea>
+      <button class="btn" id="send-job">Enviar candidatura</button>
+      <div id="job-area"></div>
+    </div>
+  </section>
+  <section id="reclame" hidden>
+    <div class="panel">
+      <h2>Reclame aqui</h2>
+      <p>Teve um problema com um atendimento? Conte o que aconteceu. Toda reclamação recebe um protocolo.</p>
+      <label for="r-nome">Seu nome</label><input id="r-nome" autocomplete="name">
+      <label for="r-mail">E-mail</label><input id="r-mail" type="email" autocomplete="email">
+      <label for="r-chamado">Número do chamado (se tiver)</label><input id="r-chamado">
+      <label for="r-motivo">Motivo</label>
+      <select id="r-motivo"><option>Demora no atendimento</option><option>Problema não foi resolvido</option><option>Atendimento do técnico</option><option>Cobrança</option><option>Falha no site ou na chamada</option><option>Outro</option></select>
+      <label for="r-texto">O que aconteceu?</label><textarea id="r-texto"></textarea>
+      <button class="btn" id="send-rec">Enviar reclamação</button>
+      <div id="rec-area"></div>
+    </div>
+  </section>
+  <p class="note">Protótipo: os envios acima são simulados e ainda não conectam a técnicos reais.</p>
+</main>
+<dialog id="chat" aria-labelledby="ch-t">
+  <h2 id="ch-t">Chat ao vivo</h2>
+  <div class="msgs" id="msgs" aria-live="polite"><p class="bot">Olá! Aqui é a TechGo. Conte o que está acontecendo.</p></div>
+  <div class="chatrow"><input id="ch-in" placeholder="Digite sua mensagem" aria-label="Mensagem"><button class="btn" id="ch-send">Enviar</button></div>
+  <form method="dialog"><button class="btn alt" style="margin:12px 0 0">Fechar</button></form>
+</dialog>
+<script>
+(function(){
+  var tabs=document.querySelectorAll('[data-tab]'),secs=['inicio','solucoes','chamar','tickets','atendimento','sobre','trabalhe','reclame'];
+  function show(id){
+    secs.forEach(function(s){document.getElementById(s).hidden=(s!==id)});
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.tab===id)});
+    window.scrollTo(0,0);
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){show(t.dataset.tab)})});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){show(b.dataset.go)})});
+
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+  document.getElementById('send-call').addEventListener('click',function(){
+    var n=esc(document.getElementById('nome').value.trim()),box=document.getElementById('call-area');
+    if(!n){box.innerHTML='<div class="ok">Informe seu nome para chamar o técnico.</div>';return}
+    var tid=genId();addTicket(tid,n,document.getElementById('tipo').value,'Normal',document.getElementById('desc').value);box.innerHTML='<div class="track" style="margin-top:22px"><p style="margin:0 0 12px">Chamado <strong class="tid">'+tid+'</strong></p><ol class="steps" id="st"><li class="now">Chamado enviado, procurando técnico</li><li>Técnico aceita</li><li>Chamada de vídeo</li><li>Problema resolvido</li></ol></div>';
+    var li=document.querySelectorAll('#st li'),i=0;
+    var iv=setInterval(function(){
+      li[i].className='done';i++;
+      if(i<li.length){li[i].className='now'}
+      if(i===2){li[1].textContent='Marcos aceitou o chamado'}
+      if(i===3){
+        clearInterval(iv);
+        box.innerHTML+='<div class="call"><div class="screen">Chamada com Marcos<br>Olá, '+n+'! Vamos resolver isso juntos.</div><div class="row"><button>Microfone</button><button>Câmera</button><button>Compartilhar tela</button><button class="end" id="end">Encerrar</button></div></div>';
+        document.getElementById('end').addEventListener('click',function(){box.innerHTML='<div class="ok">Chamada encerrada. Problema resolvido!</div>'});
+      }
+    },1400);
+  });
+
+  document.getElementById('send-job').addEventListener('click',function(){
+    var n=esc(document.getElementById('c-nome').value.trim()),m=document.getElementById('c-mail').value.trim(),box=document.getElementById('job-area');
+    if(!n||!m){box.innerHTML='<div class="ok">Preencha nome e e-mail para enviar.</div>';return}
+    box.innerHTML='<div class="ok">Candidatura recebida, '+n+'. Vamos entrar em contato por e-mail.</div>';
+  });
+  var SLA={'Urgente':['15 minutos','4 horas'],'Normal':['1 hora','1 dia útil'],'Baixa':['4 horas','3 dias úteis']};
+  var store={};
+  try{store=JSON.parse(localStorage.getItem('tg-tickets')||'{}')}catch(e){store={}}
+  function genId(){var d=new Date(),p=d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0'),c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',s='',i;for(i=0;i<4;i++){s+=c.charAt(Math.floor(Math.random()*c.length))}var id='TG-'+p+'-'+s;return store[id]?genId():id}
+  function addTicket(id,nome,cat,prio,desc){store[id]={nome:nome,cat:cat,prio:prio,desc:desc,ts:Date.now()};try{localStorage.setItem('tg-tickets',JSON.stringify(store))}catch(e){}}
+  function slaTxt(p){var s=SLA[p]||SLA.Normal;return 'primeira resposta em '+s[0]+' e meta de solução em '+s[1]}
+
+  function aberto(){
+    var parts=new Intl.DateTimeFormat('en-US',{timeZone:'America/Campo_Grande',weekday:'short',hour:'numeric',hour12:false}).formatToParts(new Date()),d='',h=0;
+    parts.forEach(function(x){if(x.type==='weekday')d=x.value;if(x.type==='hour')h=+x.value%24});
+    var on=(['Mon','Tue','Wed','Thu','Fri'].indexOf(d)>-1&&h>=8&&h<20)||(d==='Sat'&&h>=8&&h<14),el=document.getElementById('status');
+    el.textContent=on?'Atendimento aberto agora':'Fora do horário: tickets e WhatsApp seguem abertos';
+    el.className='hrs'+(on?' on':'');
+  }
+  aberto();
+
+  var cd=document.getElementById('chat'),ms=document.getElementById('msgs'),ci=document.getElementById('ch-in');
+  function addMsg(t,c){var p=document.createElement('p');p.className=c;p.textContent=t;ms.appendChild(p);ms.scrollTop=ms.scrollHeight}
+  document.querySelectorAll('[data-chat]').forEach(function(b){b.addEventListener('click',function(){cd.showModal();ci.focus()})});
+  function sendChat(){var v=ci.value.trim();if(!v)return;addMsg(v,'me');ci.value='';setTimeout(function(){addMsg('Recebemos sua mensagem. Para acompanhar o caso com um ID único, abra um ticket na aba Tickets. Atendimento: seg a sex, 8h às 20h; sáb, 8h às 14h.','bot')},900)}
+  document.getElementById('ch-send').addEventListener('click',sendChat);
+  ci.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();sendChat()}});
+
+  var tp=document.getElementById('t-prio'),tsl=document.getElementById('t-sla');
+  function showSla(){tsl.textContent='Prazo: '+slaTxt(tp.value)+'.'}
+  tp.addEventListener('change',showSla);showSla();
+  document.getElementById('send-ticket').addEventListener('click',function(){
+    var n=esc(document.getElementById('t-nome').value.trim()),c=document.getElementById('t-contato').value.trim(),d=document.getElementById('t-desc').value.trim(),box=document.getElementById('ticket-area');
+    if(!n||!c||!d){box.innerHTML='<div class="ok">Preencha nome, contato e descrição para abrir o ticket.</div>';return}
+    var id=genId();addTicket(id,n,document.getElementById('t-cat').value,tp.value,d);
+    box.innerHTML='<div class="ok">Ticket aberto, '+n+'.<br>ID: <strong class="tid">'+id+'</strong><br>Prazo: '+slaTxt(tp.value)+'. Guarde o ID para consultar o andamento.</div>';
+  });
+  document.getElementById('find-ticket').addEventListener('click',function(){
+    var id=document.getElementById('t-busca').value.trim().toUpperCase(),t=store[id],box=document.getElementById('find-area');
+    if(!t){box.innerHTML='<div class="ok">Ticket não encontrado. Confira o ID, por exemplo TG-20261021-AB12.</div>';return}
+    box.innerHTML='<div class="ok"><strong class="tid">'+id+'</strong><br>Categoria: '+esc(t.cat)+' | Prioridade: '+esc(t.prio)+'<br>Aberto em '+new Date(t.ts).toLocaleString('pt-BR',{timeZone:'America/Campo_Grande'})+'<br>Status: recebido, na fila do Nível 1 (triagem)<br>Prazo: '+slaTxt(t.prio)+'.</div>';
+  });
+
+  var q=document.getElementById('busca'),ds=document.querySelectorAll('#lista details'),vz=document.getElementById('vazio');
+  var cat='todos';
+  function filtra(){
+    var v=q.value.toLowerCase().trim(),c=0;
+    ds.forEach(function(d){var m=(cat==='todos'||d.dataset.cat===cat)&&d.textContent.toLowerCase().indexOf(v)>-1;d.hidden=!m;if(m)c++});
+    vz.hidden=c>0;
+  }
+  q.addEventListener('input',filtra);
+  document.querySelectorAll('#chips button').forEach(function(b){b.addEventListener('click',function(){
+    cat=b.dataset.c;
+    document.querySelectorAll('#chips button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+    filtra();
+  })});
+
+  document.getElementById('send-rec').addEventListener('click',function(){
+    var n=esc(document.getElementById('r-nome').value.trim()),t=document.getElementById('r-texto').value.trim(),box=document.getElementById('rec-area');
+    if(!n||!t){box.innerHTML='<div class="ok">Informe seu nome e conte o que aconteceu.</div>';return}
+    var p=genId();addTicket(p,n,'Reclamação','Normal',t);
+    box.innerHTML='<div class="ok">Reclamação registrada, '+n+'. Seu protocolo é <strong>'+p+'</strong>. Guarde esse número para acompanhar.</div>';
+  });
+})();
+</script>
+</body>
+</html>
